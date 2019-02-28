@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.github.makosful.diceroller.R;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity
             R.drawable.d6};
 
     Dice m_dice;
+    Spinner spinAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,22 +43,41 @@ public class MainActivity extends AppCompatActivity
 
         m_dice = new Dice();
 
-        // ArrayList<BE_Die> dice = m_dice.getAllDice();
-
-        gridView = findViewById(R.id.gridView);
+        ArrayList<BE_Die> dice = m_dice.getAllDice();
         Button btnRoll = findViewById(R.id.btnRoll);
         Button btnHistory = findViewById(R.id.btnHistory);
 
-        GridAdapter adapter = new GridAdapter(this, images);
+        spinAmount = findViewById(R.id.spinAmount);
+        Integer[] numbers = new Integer[]{1,2,3,4,5,6};
+        ArrayAdapter<Integer> numberAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, numbers);
+        spinAmount.setAdapter(numberAdapter);
 
-        //ListAdapter adapter = new ArrayAdapter<>()
+        spinAmount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            int amt = position + 1;
+            Toast.makeText(getApplicationContext(), "You selected: " + amt, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parentView) {
+            return;
+        }
+
+    });
+
+        gridView = findViewById(R.id.gridView);
+        GridAdapter gridAdapter = new GridAdapter(this, images);
+        gridView.setAdapter(gridAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "You've clicked the image: " + position, Toast.LENGTH_LONG).show();
+                int amt = position + 1;
+                Toast.makeText(getApplicationContext(), "You clicked the image: " + amt, Toast.LENGTH_SHORT).show();
             }
         });
+
 
         //btnRoll.setOnClickListener();
 
