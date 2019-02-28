@@ -52,20 +52,6 @@ public class MainActivity extends AppCompatActivity
         ArrayAdapter<Integer> numberAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, numbers);
         spinAmount.setAdapter(numberAdapter);
 
-        spinAmount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-            int amt = position + 1;
-            Toast.makeText(getApplicationContext(), "You selected: " + amt, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parentView) {
-            return;
-        }
-
-    });
-
         gridView = findViewById(R.id.gridView);
         GridAdapter gridAdapter = new GridAdapter(this, images);
         gridView.setAdapter(gridAdapter);
@@ -78,6 +64,19 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        spinAmount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                int amt = position + 1;
+                Toast.makeText(getApplicationContext(), "You selected: " + amt, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                return;
+            }
+
+        });
 
         btnRoll.setOnClickListener(new AdapterView.OnClickListener(){
         @Override
