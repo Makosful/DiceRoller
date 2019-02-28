@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 public class GridAdapter extends BaseAdapter {
@@ -36,7 +35,6 @@ public class GridAdapter extends BaseAdapter {
 
         imgView.setImageResource(diceImages[i]);
         imgView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        imgView.setLayoutParams(new GridView.LayoutParams(100,100)); // 100x100 square images
         return imgView;
     }
 }
