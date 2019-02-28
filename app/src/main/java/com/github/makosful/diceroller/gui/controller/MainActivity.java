@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        btnRoll.setOnClickListener(new View.OnClickListener(){
+        btnRoll.setOnClickListener(new AdapterView.OnClickListener(){
         @Override
         public void onClick(View v) {
             Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
