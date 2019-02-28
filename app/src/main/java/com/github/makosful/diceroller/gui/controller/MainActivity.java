@@ -79,7 +79,12 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        //btnRoll.setOnClickListener();
+        btnRoll.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
+        }
+    });
 
         //btnHistory.setOnClickListener();
 
