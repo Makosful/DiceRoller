@@ -12,4 +12,9 @@ public class HistoryModel
     {
         return cache.results;
     }
+
+    public void clearResultList()
+    {
+        cache.results.clear();
+    }
 }

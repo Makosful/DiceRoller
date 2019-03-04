@@ -15,11 +15,10 @@ import java.util.List;
 
 public class History extends AppCompatActivity
 {
+    private HistoryModel model;
 
     private RecyclerView recyclerView;
     private ResultAdapter adapter;
-
-    private HistoryModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +33,14 @@ public class History extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ResultAdapter(model.getResultList(), this);
+        updateList();
 
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void updateList()
+    {
+        adapter = new ResultAdapter(model.getResultList(), this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -43,5 +48,11 @@ public class History extends AppCompatActivity
     {
         setResult(RESULT_OK);
         finish();
+    }
+
+    public void clearHistory(View view)
+    {
+        model.clearResultList();
+        updateList();
     }
 }
