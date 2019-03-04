@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.github.makosful.diceroller.R;
 import com.github.makosful.diceroller.be.Die;
+import com.github.makosful.diceroller.gui.model.DiceGridApadter;
 import com.github.makosful.diceroller.gui.model.MainModel;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
@@ -50,24 +52,32 @@ public class MainActivity extends AppCompatActivity
         int amount = Integer.parseInt(string);
 
         Random rand = new Random();
-        Die[] dice = new Die[amount];
+        ArrayList<Die> dice = new ArrayList<>();
 
-        for (int i = 0; i < dice.length; i++)
+        for (int i = 0; i < amount; i++)
         {
             int x = rand.nextInt(6) + 1;
             Die die = new Die(x);
             Drawable drawable = getDrawable(
                     getResources().getIdentifier("d" + x, "drawable", getPackageName()));
             die.setDrawable(drawable);
-            dice[i] = die;
+            dice.add(die);
         }
+
+        DiceGridApadter gridApadter = new DiceGridApadter(this, R.layout.gridview_dice_layout,
+                                                              dice);
+        gridView.setAdapter(gridApadter);
 
         StringBuilder sb = new StringBuilder();
+        int sum = 0;
+        sb.append(amount + " dice were thrown, landing on [");
         for (Die die: dice) {
-            sb.append(die.getValue());
-            sb.append(", ");
+            sum += die.getValue();
+            sb.append(die.getValue() + ", ");
         }
+        sb.delete(sb.length()-2, sb.length());
+        sb.append("] resulting in " + sum);
 
-        gridView.ad
+        model.addResult(sb.toString());
     }
 }
