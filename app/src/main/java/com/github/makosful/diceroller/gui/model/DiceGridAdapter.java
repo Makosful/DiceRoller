@@ -13,14 +13,14 @@ import com.github.makosful.diceroller.be.Die;
 
 import java.util.List;
 
-public class DiceGridApadter extends ArrayAdapter<Die>
+public class DiceGridAdapter extends ArrayAdapter<Die>
 {
 
     private final Context context;
     private final int resource;
     private final List<Die> data;
 
-    public DiceGridApadter(Context context, int resource, List<Die> data)
+    public DiceGridAdapter(Context context, int resource, List<Die> data)
     {
         super(context, resource, data);
         this.context = context;
